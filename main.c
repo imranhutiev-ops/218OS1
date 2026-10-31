@@ -10,7 +10,7 @@ static void line(void) {
 }
 
 int main(int argc, char **argv) {
-    SetConsoleOutputCP(65001);   /* чтобы русский текст выводился нормально */
+    SetConsoleOutputCP(65001);   
 
     if (argc < 3) {
         printf("Использование: %s <число_потоков> <размер_массива> [pause]\n", argv[0]);
@@ -30,7 +30,6 @@ int main(int argc, char **argv) {
     int *a_par = (int *)malloc((size_t)N * sizeof(int));
     if (!a_seq || !a_par) { printf("Ошибка: памяти не выделяется, надо мозги подкачать\n"); return 1; }
 
-    /* одинаковые случайные данные для обеих версий (xorshift32) */
     unsigned x = 2463534242u;
     for (unsigned i = 0; i < N; i++) {
         int v = INT_MAX_V;
@@ -48,7 +47,6 @@ int main(int argc, char **argv) {
 
     double t_par = bitonic_sort_parallel(a_par, N, T, pause);
 
-    /* проверка: массивы совпадают и отсортированы */
     int ok = 1;
     for (unsigned i = 0; i < n0; i++) {
         if (a_seq[i] != a_par[i]) ok = 0;
